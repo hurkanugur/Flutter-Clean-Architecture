@@ -1,6 +1,6 @@
 Weather Forecast App with Flutter Clean Architecture and Riverpod State Management\
 \
-This Weather Forecast App is a demonstration of Flutter Clean Architecture principles, showcasing efficient state management using Riverpod.
+This Weather Forecast App is a demonstration of Flutter Clean Architecture principles, showcasing efficient state management using Riverpod.\
 \
 **Key Dependencies:**\
 \
