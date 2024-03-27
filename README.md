@@ -1,16 +1,18 @@
-# clean_architecture
+Weather Forecast App with Flutter Clean Architecture and Riverpod State Management
 
-A new Flutter project.
+This Weather Forecast App is a demonstration of Flutter Clean Architecture principles, showcasing efficient state management using Riverpod.
 
-## Getting Started
+**Key Dependencies:**
 
-This project is a starting point for a Flutter application.
+cupertino_icons: ^1.0.6 - Utilized for Application Icons
+flutter_riverpod: ^2.5.1 - Employs Riverpod for State Management
+dio: ^5.4.2 - HTTP Client for network requests
+cookie_jar: ^4.0.8 - Manages cookies in HTTP requests
+dio_cookie_manager: ^3.1.1 - Handles cookies within Dio
+shared_preferences: ^2.2.2 - Facilitates Persistent Data Storage
+sqflite: ^2.3.2 - Enables Local Data Storage
+equatable: ^2.0.5 - Facilitates Object Comparison
+go_router: ^13.2.1 - Manages Routing within the application
+lottie: ^3.1.0 - Used for Lottie Animations
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app serves as a practical example of integrating various Flutter tools and packages to create a clean and efficient architecture for weather forecasting applications.
