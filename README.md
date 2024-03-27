@@ -15,4 +15,4 @@ equatable: ^2.0.5 - Facilitates Object Comparison\
 go_router: ^13.2.1 - Manages Routing within the application\
 lottie: ^3.1.0 - Used for Lottie Animations\
 \
-This app serves as a practical example of integrating various Flutter tools and packages to create a clean and efficient architecture for weather forecasting applications.\
+This app serves as a practical example of integrating various Flutter tools and packages to create a clean and efficient architecture for weather forecasting applications.
