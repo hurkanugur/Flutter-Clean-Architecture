@@ -15,4 +15,4 @@ This Weather Forecast App is a demonstration of Flutter Clean Architecture princ
 **go_router:** ^13.2.1 # Routing\
 **lottie:** ^3.1.0 # Lottie Animations\
 \
-This application uses the OpenWeatherMap (https://openweathermap.org/current) Current Weather Data API to fetch real-time weather information.
+This app uses the OpenWeatherMap Current Weather Data API (https://openweathermap.org/current) to fetch real-time weather information.
