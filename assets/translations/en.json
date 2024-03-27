@@ -1,0 +1,65 @@
+{
+    "SERVER_EXCEPTIONS": {
+        "DIO_EXCEPTION": {
+            "CONNECTION_TIMEOUT": "An error occurred due to a connection timeout.",
+            "SEND_TIMEOUT": "An error occurred due to a send timeout.",
+            "RECEIVE_TIMEOUT": "An error occurred due to a receive timeout.",
+            "BAD_CERTIFICATE": "An error occurred due to an incorrect certificate.",
+            "BAD_RESPONSE": "An error occurred due to an incorrect response status code.",
+            "CANCEL": "An error occurred because the request was cancelled.",
+            "CONNECTION_ERROR": "An error occurred due to a connection error.",
+            "UNKNOWN": "An error occurred due to an unknown reason."
+        },
+        "WEATHER_EXCEPTION": {
+            "REGION_ERROR": "An error occurred due to an unrecognized or invalid region being requested from the server.",
+            "LANGUAGE_ERROR": "An error occurred because the server received data in a language it doesn't support or recognize."
+        },
+        "UNKNOWN_EXCEPTION": {
+            "NULL_RESPONSE_VALUE_ERROR": "An error occurred because the server returned an empty or null response instead of the expected data.",
+            "UNKNOWN_EXCEPTION": "An unspecified error occurred on the server that couldn't be categorized."
+        }
+    },
+    "CLIENT_EXCEPTION": {
+        "UNEXPECTED_FAILURE_TYPE_ERROR": "An error occurred due to unexpected failure type.",
+        "TRANSLATION_NOT_FOUND_ERROR": "An error occurred due to translation not found.",
+        "TRANSLATION_UPDATE_ERROR": "An error occurred while updating the translations.",
+        "COLOR_NOT_FOUND_ERROR": "An error occurred due to color not found.",
+        "ENUM_NOT_FOUND_ERROR": "An error occurred due to enum not found.",
+        "NO_INTERNET_CONNECTION_ERROR": "An error occurred due to no internet connection.",
+        "DATABASE_NOT_FOUND_ERROR": "An error occurred due to database not found.",
+        "FILE_NOT_FOUND_ERROR": "An error occurred due to file not found.",
+        "UNEXPECTED_DATA_TYPE_EXCEPTION": "An error occurred due to unexpected data type.",
+        "UNKNOWN_EXCEPTION": "An error occurred due to unknown exception.",
+        "WEB_CERTIFICATE_COULD_NOT_BE_LOADED": "An error occurred while loading the web certificate."
+    },
+    "APPLICATION_TEXT": {
+        "WEATHER": "Weather",
+        "CURRENT_WEATHER": "Current Weather",
+        "DETAILS": "Details",
+        "WEATHER_DETAILS": "Weather Details",
+        "REFRESH": "Refresh",
+        "SETTINGS": "Settings",
+        "LOCATION": "Location",
+        "TEMPERATURE": "Temperature",
+        "TEMPERATURE_FEELS_LIKE": "Feels Like",
+        "TEMPERATURE_MIN": "Minimum Temperature",
+        "TEMPERATURE_MAX": "Maximum Temperature",
+        "WIND": "Wind",
+        "PRESSURE": "Pressure",
+        "HUMIDITY": "Humidity",
+        "SEA_LEVEL_PRESSURE": "Sea Level Pressure",
+        "GROUND_LEVEL_PRESSURE": "Ground Level Pressure",
+        "PROFILE_SETTINGS": "Profile Settings",
+        "PROFILE_SETTINGS_TIP": "Manage your profile settings",
+        "LOCATION_SETTINGS": "Location Settings",
+        "LOCATION_SETTINGS_TIP": "Configure your location preferences",
+        "ABOUT": "About",
+        "ABOUT_TIP": "Learn more about this app",
+        "MENU": "Menu",
+        "OPTIONS": "Options",
+        "CELSIUS": "°C",
+        "PERCENTAGE": "%",
+        "WIND_SPEED_MAGNITUDE": "m/s",
+        "PRESSURE_MAGNITUDE": "hPA"
+    }
+}

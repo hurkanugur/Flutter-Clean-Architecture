@@ -1,0 +1,65 @@
+{
+    "SERVER_EXCEPTIONS": {
+        "DIO_EXCEPTION": {
+            "CONNECTION_TIMEOUT": "Bir bağlantı zaman aşımı nedeniyle bir hata oluştu.",
+            "SEND_TIMEOUT": "İstek gönderilirken zaman aşımı nedeniyle bir hata oluştu.",
+            "RECEIVE_TIMEOUT": "Yanıt alınırken zaman aşımı nedeniyle bir hata oluştu.",
+            "BAD_CERTIFICATE": "Yanlış bir sertifika yapılandırması nedeniyle bir hata oluştu.",
+            "BAD_RESPONSE": "Yanıtta yanlış bir durum kodu olduğu için bir hata oluştu.",
+            "CANCEL": "İstek iptal edildiği için bir hata oluştu.",
+            "CONNECTION_ERROR": "'xhr.onError' veya SocketExceptions gibi bir bağlantı hatası nedeniyle bir hata oluştu.",
+            "UNKNOWN": "Bilinmeyen bir hata türü oluştu."
+        },
+        "WEATHER_EXCEPTION": {
+            "REGION_ERROR": "Bilinmeyen bir bölge isteği nedeniyle bir hata oluştu.",
+            "LANGUAGE_ERROR": "Sunucu, desteklemediği veya tanımadığı bir dilde veri aldığı için bir hata oluştu."
+        },
+        "UNKNOWN_EXCEPTION": {
+            "NULL_RESPONSE_VALUE_ERROR": "Sunucu, beklenen veri yerine boş veya null bir yanıt döndüğü için bir hata oluştu.",
+            "UNKNOWN_EXCEPTION": "Kategorize edilemeyen belirtilmemiş bir hata oluştu."
+        }
+    },
+    "CLIENT_EXCEPTION": {
+        "UNEXPECTED_FAILURE_TYPE_ERROR": "Beklenmeyen hata türü nedeniyle bir hata oluştu.",
+        "TRANSLATION_NOT_FOUND_ERROR": "Çeviri bulunamadığı için bir hata oluştu.",
+        "TRANSLATION_UPDATE_ERROR": "Çeviriler güncellenirken bir hata oluştu.",
+        "COLOR_NOT_FOUND_ERROR": "Renk bulunamadığı için bir hata oluştu.",
+        "ENUM_NOT_FOUND_ERROR": "Enum bulunamadığı için bir hata oluştu.",
+        "NO_INTERNET_CONNECTION_ERROR": "İnternet bağlantısı olmadığı için bir hata oluştu.",
+        "DATABASE_NOT_FOUND_ERROR": "Veritabanı bulunamadığı için bir hata oluştu.",
+        "FILE_NOT_FOUND_ERROR": "Dosya bulunamadığı için bir hata oluştu.",
+        "UNEXPECTED_DATA_TYPE_EXCEPTION": "Beklenmeyen veri türü nedeniyle bir hata oluştu.",
+        "UNKNOWN_EXCEPTION": "Bilinmeyen bir hata nedeniyle bir hata oluştu.",
+        "WEB_CERTIFICATE_COULD_NOT_BE_LOADED": "Web sertifikası yüklenirken bir hata oluştu."
+    },
+    "APPLICATION_TEXT": {
+        "WEATHER": "Hava Durumu",
+        "CURRENT_WEATHER": "Anlık Hava Durumu",
+        "DETAILS": "Detaylar",
+        "WEATHER_DETAILS": "Hava Durumu Detayları",
+        "REFRESH": "Yenile",
+        "SETTINGS": "Ayarlar",
+        "LOCATION": "Konum",
+        "TEMPERATURE": "Sıcaklık",
+        "TEMPERATURE_FEELS_LIKE": "Hissedilen Sıcaklık",
+        "TEMPERATURE_MIN": "Minimum Sıcaklık",
+        "TEMPERATURE_MAX": "Maksimum Sıcaklık",
+        "WIND": "Rüzgar",
+        "PRESSURE": "Basınç",
+        "HUMIDITY": "Nem",
+        "SEA_LEVEL_PRESSURE": "Deniz Seviyesi Basıncı",
+        "GROUND_LEVEL_PRESSURE": "Yer Seviyesi Basıncı",
+        "PROFILE_SETTINGS": "Profil Ayarları",
+        "PROFILE_SETTINGS_TIP": "Profil ayarlarınızı yönetin",
+        "LOCATION_SETTINGS": "Konum Ayarları",
+        "LOCATION_SETTINGS_TIP": "Konum tercihlerinizi yapılandırın",
+        "ABOUT": "Hakkında",
+        "ABOUT_TIP": "Bu uygulama hakkında daha fazla bilgi edinin",
+        "MENU": "Menü",
+        "OPTIONS": "Seçenekler",
+        "CELSIUS": "°C",
+        "PERCENTAGE": "%",
+        "WIND_SPEED_MAGNITUDE": "m/s",
+        "PRESSURE_MAGNITUDE": "hPA"
+    }
+}

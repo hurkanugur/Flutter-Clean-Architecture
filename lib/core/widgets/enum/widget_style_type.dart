@@ -1,0 +1,4 @@
+enum WidgetStyleType {
+  filled,
+  transparent,
+}
