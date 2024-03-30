@@ -27,20 +27,33 @@ enum LanguageType {
 
   /// Creates a [LanguageType] from [languageName].
   ///
-  /// Throws [ClientFailure] when an error occurs.
-  LanguageType? getLanguageByName({required String? languageName}) {
-    if (languageName == null || languageName.isEmpty) {
-      return null;
-    }
-
+  /// Returns `null` when the enum is not found.
+  static LanguageType? getLanguageByName({required String? languageName}) {
     try {
       return values.firstWhere((element) => element.name == languageName);
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }
+    return null;
+  }
+
+  /// Creates a [LanguageType] from [index].
+  ///
+  /// Returns `null` when the enum is not found.
+  static LanguageType? getLanguageByIndex({required int? index}) {
+    try {
+      return values.firstWhere((element) => element.index == index);
+    } catch (ex) {
+      ClientFailure.createAndLog(
+        stackTrace: StackTrace.current,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.enumNotFoundError,
+      );
+    }
+    return null;
   }
 }

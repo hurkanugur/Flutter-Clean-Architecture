@@ -1,4 +1,33 @@
 enum TextType {
+  databaseOpenOperationSuccess('DATABASE_OPEN_OPERATION_SUCCESS'),
+  databaseCloseOperationSuccess('DATABASE_CLOSE_OPERATION_SUCCESS'),
+  databaseDeleteOperationSuccess('DATABASE_DELETE_OPERATION_SUCCESS'),
+  databaseInsertRowOperationSuccess('DATABASE_INSERT_ROW_OPERATION_SUCCESS'),
+  databaseUpdateRowOperationSuccess('DATABASE_UPDATE_ROW_OPERATION_SUCCESS'),
+  databaseDeleteRowOperationSuccess('DATABASE_DELETE_ROW_OPERATION_SUCCESS'),
+  databaseTable('DATABASE_TABLE'),
+  webCertificateIsTrustedSuccessfully('WEB_CERTIFICATE_IS_TRUSTED_SUCCESSFULLY'),
+  cookies('COOKIES'),
+  notificationPermissionTitle('NOTIFICATION_PERMISSON_TITLE'),
+  notificationPermissionExplanation('NOTIFICATION_PERMISSON_EXPLANATION'),
+  notificationAccessPermissionRequestTitle('NOTIFICATION_ACCESS_PERMISSION_REQUEST_TITLE'),
+  notificationAccessPermissionRequestExplanation('NOTIFICATION_ACCESS_PERMISSION_REQUEST_EXPLANATION'),
+  cameraPermissionTitle('CAMERA_PERMISSON_TITLE'),
+  cameraPermissionExplanation('CAMERA_PERMISSON_EXPLANATION'),
+  cameraAccessPermissionRequestTitle('CAMERA_ACCESS_PERMISSION_REQUEST_TITLE'),
+  cameraAccessPermissionRequestExplanation('CAMERA_ACCESS_PERMISSION_REQUEST_EXPLANATION'),
+  calendarPermissionTitle('CALENDAR_PERMISSON_TITLE'),
+  calendarPermissionExplanation('CALENDAR_PERMISSON_EXPLANATION'),
+  calendarAccessPermissionRequestTitle('CALENDAR_ACCESS_PERMISSION_REQUEST_TITLE'),
+  calendarAccessPermissionRequestExplanation('CALENDAR_ACCESS_PERMISSION_REQUEST_EXPLANATION'),
+  storagePermissionTitle('STORAGE_PERMISSON_TITLE'),
+  storagePermissionExplanation('STORAGE_PERMISSON_EXPLANATION'),
+  storageAccessPermissionRequestTitle('STORAGE_ACCESS_PERMISSION_REQUEST_TITLE'),
+  storageAccessPermissionRequestExplanation('STORAGE_ACCESS_PERMISSION_REQUEST_EXPLANATION'),
+  galleryPermissionTitle('GALLERY_PERMISSON_TITLE'),
+  galleryPermissionExplanation('GALLERY_PERMISSON_EXPLANATION'),
+  galleryAccessPermissionRequestTitle('GALLERY_ACCESS_PERMISSION_REQUEST_TITLE'),
+  galleryAccessPermissionRequestExplanation('GALLERY_ACCESS_PERMISSION_REQUEST_EXPLANATION'),
   weather('WEATHER'),
   currentWeather('CURRENT_WEATHER'),
   details('DETAILS'),
@@ -26,7 +55,8 @@ enum TextType {
   celsius('CELSIUS'),
   percentage('PERCENTAGE'),
   windSpeedMagnitude('WIND_SPEED_MAGNITUDE'),
-  pressureMagnitude('PRESSURE_MAGNITUDE');
+  pressureMagnitude('PRESSURE_MAGNITUDE'),
+  noResultsFound('NO_RESULTS_FOUND');
 
   final String name;
 

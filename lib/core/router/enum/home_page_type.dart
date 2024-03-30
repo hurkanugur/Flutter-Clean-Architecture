@@ -18,10 +18,10 @@ enum HomePageType {
 
     try {
       return values.firstWhere((element) => element.index == index);
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }

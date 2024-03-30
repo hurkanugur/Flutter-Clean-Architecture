@@ -17,4 +17,7 @@ class AppResources {
 
   /// https://lottiefiles.com/animations/little-sun-AwD33kTUJR?from=search
   static const String lottieLoadingAnimationPath = 'assets/lottie/loading_animation.json';
+
+  /// URL: https://lottiefiles.com/animations/wind-icon-wdUwYp3r2m?from=search
+  static const String noResultsAnimationPath = 'assets/lottie/no_results_animation.json';
 }

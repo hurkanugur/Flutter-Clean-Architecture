@@ -18,45 +18,37 @@ enum ServerExceptionType {
 
   /// Creates a [ServerExceptionType] from [serverExceptionName].
   ///
-  /// Throws a [ClientFailure] when an error occurs.
+  /// Returns `null` when the enum is not found.
   static ServerExceptionType? getServerExceptionByName({required String? serverExceptionName}) {
-    if (serverExceptionName == null || serverExceptionName.isEmpty) {
-      return null;
-    }
-
     try {
       return values.firstWhere((element) => element.name == serverExceptionName);
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }
+    return null;
   }
 
   /// Retrieves a problem type by its name.
   ///
-  /// Throws [ClientFailure] when the type does not exist.
+  /// Returns `null` when the enum is not found.
   Enum? getProblemByName({required String? serverProblemName}) {
-    if (serverProblemName == null || serverProblemName.isEmpty) {
-      return null;
-    }
-
     try {
       return switch (this) {
-        ServerExceptionType.dioException => DioExceptionType.values.firstWhere((element) => element.name == serverProblemName, orElse: () => DioExceptionType.unknown),
         ServerExceptionType.weatherException => WeatherProblemType.findByName(serverProblemName: serverProblemName),
         ServerExceptionType.unknownException => UnknownProblemType.findByName(serverProblemName: serverProblemName),
+        ServerExceptionType.dioException => DioExceptionType.values.firstWhere((element) => element.name == serverProblemName, orElse: () => DioExceptionType.unknown),
       };
-    } on ClientFailure {
-      rethrow;
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }
+    return null;
   }
 }

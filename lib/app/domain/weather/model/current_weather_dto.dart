@@ -35,11 +35,11 @@ class CurrentWeatherDTO extends Equatable {
       );
     } on ClientFailure {
       rethrow;
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unexpectedDataTypeException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.deserializationError,
       );
     }
   }
@@ -58,11 +58,11 @@ class CurrentWeatherDTO extends Equatable {
       };
     } on ClientFailure {
       rethrow;
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unexpectedDataTypeException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.serializationError,
       );
     }
   }

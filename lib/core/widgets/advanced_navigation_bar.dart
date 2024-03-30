@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
+import 'package:clean_architecture/core/theme/extension/color_extension.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_bottom_navigation_bar_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

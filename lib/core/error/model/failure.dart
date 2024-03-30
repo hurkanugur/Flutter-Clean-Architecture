@@ -2,24 +2,23 @@ import 'package:equatable/equatable.dart';
 
 class Failure extends Equatable implements Exception {
   final StackTrace stackTrace;
-
-  final Object? thrownErrorOrException;
+  final Object? exception;
 
   const Failure({
-    required this.thrownErrorOrException,
+    required this.exception,
     required this.stackTrace,
   });
 
   @override
-  List<Object?> get props => [stackTrace, thrownErrorOrException];
+  List<Object?> get props => [stackTrace, exception];
 
   /// Creates a copy of this class.
   Failure copyWith({
     StackTrace? stackTrace,
-    Object? thrownErrorOrException,
+    Object? exception,
   }) {
     return Failure(
-      thrownErrorOrException: thrownErrorOrException ?? this.thrownErrorOrException,
+      exception: exception ?? this.exception,
       stackTrace: stackTrace ?? this.stackTrace,
     );
   }

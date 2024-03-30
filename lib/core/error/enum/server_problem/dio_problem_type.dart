@@ -18,16 +18,17 @@ enum DioProblemType {
 
   /// Creates a [DioProblemType] from [dioExceptionType].
   ///
-  /// Throws a [ClientFailure] when an error occurs.
-  DioProblemType findByDioException({required DioExceptionType dioExceptionType}) {
+  /// Returns `null` when the enum is not found.
+  DioProblemType? findByDioException({required DioExceptionType dioExceptionType}) {
     try {
       return values.firstWhere((element) => element.name == dioExceptionType.name);
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }
+    return null;
   }
 }

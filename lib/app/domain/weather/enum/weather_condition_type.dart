@@ -99,16 +99,12 @@ enum WeatherConditionType {
   ///
   /// Throws a [ClientFailure] when an error occurs.
   static WeatherConditionType? getWeatherConditionByCode({required int? weatherConditionCode}) {
-    if (weatherConditionCode == null) {
-      return null;
-    }
-
     try {
       return WeatherConditionType.values.firstWhere((condition) => condition.weatherConditionCode == weatherConditionCode);
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }

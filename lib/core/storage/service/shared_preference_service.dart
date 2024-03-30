@@ -1,57 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:clean_architecture/core/localization/enum/language_type.dart';
+import 'package:clean_architecture/core/security/service/data_security_service.dart';
+import 'package:clean_architecture/core/theme/extension/theme_mode_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clean_architecture/config/app_config.dart';
-import 'package:clean_architecture/core/localization/enum/language_type.dart';
 
 class SharedPreferenceService {
-  static const String _themeKey = 'theme';
-  static const String _languageKey = 'language';
+  static const String _encryptedUsernameKey = 'encrypted_username';
+  static const String _languageTypeKey = 'language_type';
+  static const String _themeTypeKey = 'theme_type';
 
   final SharedPreferences _sharedPreferences;
+  final DataSecurityService _dataSecurityService;
 
   const SharedPreferenceService({
     required SharedPreferences sharedPreferences,
-  }) : _sharedPreferences = sharedPreferences;
+    required DataSecurityService dataSecurityService,
+  })  : _sharedPreferences = sharedPreferences,
+        _dataSecurityService = dataSecurityService;
 
-  /// Creates an instance of this class.
-  static Future<SharedPreferenceService> createInstance() async {
-    return SharedPreferenceService(
-      sharedPreferences: await SharedPreferences.getInstance(),
-    );
+  /// Setter for [_encryptedUsernameKey].
+  Future<void> setEncryptedUsername({required String plaintextUsername}) async {
+    final String? encryptedUsername = _dataSecurityService.encrypt(plainText: plaintextUsername);
+
+    if (encryptedUsername == null) {
+      await deleteFromSharedPreferences(deleteEncryptedUsername: true);
+    } else {
+      await _sharedPreferences.setString(_encryptedUsernameKey, encryptedUsername);
+    }
   }
 
-  /// Setter for [_themeKey].
-  Future<void> setTheme({required ThemeMode themeMode}) async {
-    await _sharedPreferences.setInt(_themeKey, themeMode.index);
+  /// Getter for [_encryptedUsernameKey].
+  String getPlaintextUsername() {
+    final String? encryptedUsername = _sharedPreferences.getString(_encryptedUsernameKey);
+
+    if (encryptedUsername == null) {
+      return AppConfig.defaultUsername;
+    }
+
+    final String? plaintextUsername = _dataSecurityService.decrypt(chiperText: encryptedUsername);
+    return plaintextUsername ?? AppConfig.defaultUsername;
   }
 
-  /// Getter for [_themeKey].
-  ThemeMode getTheme() {
-    final int? index = _sharedPreferences.getInt(_themeKey);
-
-    return ThemeMode.values.firstWhere(
-      (element) => element.index == index,
-      orElse: () => AppConfig.defaultThemeMode,
-    );
+  /// Setter for [_languageTypeKey].
+  Future<void> setLanguageType({required LanguageType languageType}) async {
+    await _sharedPreferences.setInt(_languageTypeKey, languageType.index);
   }
 
-  /// Setter for [_languageKey].
-  Future<void> setLanguage({required LanguageType languageType}) async {
-    await _sharedPreferences.setInt(_languageKey, languageType.index);
+  /// Getter for [_languageTypeKey].
+  LanguageType getLanguageType() {
+    final int? index = _sharedPreferences.getInt(_languageTypeKey);
+    return LanguageType.getLanguageByIndex(index: index) ?? AppConfig.defaultLanguageType;
   }
 
-  /// Getter for [_languageKey].
-  LanguageType getLanguage() {
-    final int? index = _sharedPreferences.getInt(_languageKey);
-
-    return LanguageType.values.firstWhere(
-      (element) => element.index == index,
-      orElse: () => AppConfig.defaultLanguageType,
-    );
+  /// Setter for [_themeTypeKey].
+  Future<void> setThemeMode({required ThemeMode themeMode}) async {
+    await _sharedPreferences.setInt(_themeTypeKey, themeMode.index);
   }
 
-  /// Clears all key value pairs.
-  Future<void> clear() async {
-    await _sharedPreferences.clear();
+  /// Getter for [_themeTypeKey].
+  ThemeMode getThemeMode() {
+    final int? index = _sharedPreferences.getInt(_themeTypeKey);
+    return ThemeModeExtension.getThemeByIndex(index: index) ?? AppConfig.defaultThemeMode;
+  }
+
+  /// Deletes a key from the [_sharedPreferences].
+  ///
+  /// When [deleteALL] is `true`, it clears all key-value pairs from the [_sharedPreferences].
+  Future<void> deleteFromSharedPreferences({
+    bool deleteALL = false,
+    bool deleteEncryptedUsername = false,
+    bool deleteLanguageType = false,
+    bool deleteThemeType = false,
+  }) async {
+    if (deleteALL == true) {
+      await _sharedPreferences.clear();
+      return;
+    }
+
+    if (deleteEncryptedUsername == true) {
+      await _sharedPreferences.remove(_encryptedUsernameKey);
+    }
+
+    if (deleteLanguageType == true) {
+      await _sharedPreferences.remove(_languageTypeKey);
+    }
+
+    if (deleteThemeType == true) {
+      await _sharedPreferences.remove(_themeTypeKey);
+    }
   }
 }

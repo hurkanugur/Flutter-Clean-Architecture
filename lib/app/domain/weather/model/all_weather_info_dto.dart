@@ -32,11 +32,11 @@ class AllWeatherInfoDTO extends Equatable {
         wind: json['wind'] == null ? null : CurrentWindDTO.fromJson(json: json['wind']),
         name: json['name'],
       );
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unexpectedDataTypeException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.deserializationError,
       );
     }
   }
@@ -52,11 +52,11 @@ class AllWeatherInfoDTO extends Equatable {
         'wind': (wind)?.toJson(),
         'name': name,
       };
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unexpectedDataTypeException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.serializationError,
       );
     }
   }

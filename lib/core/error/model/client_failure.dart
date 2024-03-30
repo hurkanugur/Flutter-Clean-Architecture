@@ -5,27 +5,41 @@ import 'package:clean_architecture/core/log/extension/log_extension.dart';
 class ClientFailure extends Failure {
   final ClientExceptionType clientExceptionType;
 
-  ClientFailure({
+  const ClientFailure({
     required super.stackTrace,
-    required super.thrownErrorOrException,
+    super.exception,
     required this.clientExceptionType,
-  }) {
-    super.stackTrace.printErrorMessage(failure: this);
-  }
+  });
 
   @override
-  List<Object?> get props => [stackTrace, thrownErrorOrException, clientExceptionType];
+  List<Object?> get props => [stackTrace, exception, clientExceptionType];
 
   @override
   ClientFailure copyWith({
     StackTrace? stackTrace,
-    Object? thrownErrorOrException,
+    Object? exception,
     ClientExceptionType? clientExceptionType,
   }) {
     return ClientFailure(
       stackTrace: stackTrace ?? this.stackTrace,
-      thrownErrorOrException: thrownErrorOrException ?? this.thrownErrorOrException,
+      exception: exception ?? this.exception,
       clientExceptionType: clientExceptionType ?? this.clientExceptionType,
     );
+  }
+
+  /// Creates a [ClientFailure] and logs the failure.
+  factory ClientFailure.createAndLog({
+    required StackTrace stackTrace,
+    required ClientExceptionType clientExceptionType,
+    Object? exception,
+  }) {
+    final ClientFailure clientFailure = ClientFailure(
+      stackTrace: stackTrace,
+      exception: exception,
+      clientExceptionType: clientExceptionType,
+    );
+
+    stackTrace.printErrorMessageByFailure(failure: clientFailure);
+    return clientFailure;
   }
 }

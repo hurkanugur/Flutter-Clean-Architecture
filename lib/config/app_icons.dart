@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AppIcons {
   const AppIcons._();
 
-  // Weather Condition Icons
-  static const IconData unknownWeatherIcon = Icons.query_stats_outlined;
-  static const IconData stormyWeatherIcon = Icons.storm;
-  static const IconData drizzleWeatherIcon = Icons.water_drop;
-  static const IconData rainyWeatherIcon = Icons.cloudy_snowing;
-  static const IconData snowyWeatherIcon = Icons.ac_unit;
-  static const IconData freezingWeatherIcon = Icons.snowboarding;
-  static const IconData foggyWeatherIcon = Icons.foggy;
-  static const IconData volcanicWeatherIcon = Icons.volcano;
-  static const IconData sunnyWeatherIcon = Icons.sunny;
-  static const IconData cloudyWeatherIcon = Icons.cloud;
+// Weather Condition Icons
+  static const IconData unknownWeatherIcon = FontAwesomeIcons.question;
+  static const IconData stormyWeatherIcon = FontAwesomeIcons.cloudShowersHeavy;
+  static const IconData drizzleWeatherIcon = FontAwesomeIcons.cloudRain;
+  static const IconData rainyWeatherIcon = FontAwesomeIcons.cloudSunRain;
+  static const IconData snowyWeatherIcon = FontAwesomeIcons.snowflake;
+  static const IconData freezingWeatherIcon = FontAwesomeIcons.personSnowboarding;
+  static const IconData foggyWeatherIcon = FontAwesomeIcons.smog;
+  static const IconData volcanicWeatherIcon = FontAwesomeIcons.mountain;
+  static const IconData sunnyWeatherIcon = FontAwesomeIcons.sun;
+  static const IconData cloudyWeatherIcon = FontAwesomeIcons.cloud;
 
-  // Weather Details Icons
-  static const IconData humidityIcon = Icons.opacity;
-  static const IconData pressureIcon = Icons.alarm;
-  static const IconData groundLevelPressureIcon = Icons.home_work_sharp;
-  static const IconData seaLevelPressureIcon = Icons.anchor;
-  static const IconData windSpeedIcon = Icons.toys;
+// Weather Details Icons
+  static const IconData humidityIcon = FontAwesomeIcons.droplet;
+  static const IconData pressureIcon = FontAwesomeIcons.gaugeHigh;
+  static const IconData groundLevelPressureIcon = FontAwesomeIcons.house;
+  static const IconData seaLevelPressureIcon = FontAwesomeIcons.anchor;
+  static const IconData windSpeedIcon = FontAwesomeIcons.wind;
 
-  // General Icons
-  static const IconData warningIcon = Icons.warning;
-  static const IconData refreshIcon = Icons.refresh;
-  static const IconData weatherIcon = Icons.cloud_sharp;
-  static const IconData weatherDetailsIcon = Icons.grid_view_rounded;
-  static const IconData settingsIcon = Icons.settings;
-  static const IconData profileIcon = Icons.person;
-  static const IconData locationIcon = Icons.location_on;
-  static const IconData aboutIcon = Icons.bug_report;
-  static const IconData nextIcon = Icons.navigate_next;
-  static const IconData unknownIcon = Icons.question_mark;
-  static const IconData menuIcon = Icons.menu;
-  static const IconData moreIcon = Icons.more_vert;
-  static const IconData dropdownIcon = Icons.keyboard_arrow_down_sharp;
+// General Icons
+  static const IconData warningIcon = FontAwesomeIcons.triangleExclamation;
+  static const IconData refreshIcon = FontAwesomeIcons.arrowsRotate;
+  static const IconData weatherIcon = FontAwesomeIcons.cloud;
+  static const IconData weatherDetailsIcon = FontAwesomeIcons.tableCells;
+  static const IconData settingsIcon = FontAwesomeIcons.gear;
+  static const IconData profileIcon = FontAwesomeIcons.user;
+  static const IconData locationIcon = FontAwesomeIcons.locationDot;
+  static const IconData aboutIcon = FontAwesomeIcons.bug;
+  static const IconData nextIcon = FontAwesomeIcons.angleRight;
+  static const IconData unknownIcon = FontAwesomeIcons.question;
+  static const IconData menuIcon = FontAwesomeIcons.bars;
+  static const IconData moreIcon = FontAwesomeIcons.ellipsisVertical;
+  static const IconData dropdownIcon = FontAwesomeIcons.caretDown;
 }

@@ -1,4 +1,4 @@
-import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
+import 'package:clean_architecture/core/theme/extension/color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

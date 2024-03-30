@@ -11,11 +11,11 @@ class AppDimensions {
   static const int weatherDetailGridViewLandscapeCellSize = 4;
 
   // Card Size
-  static double get cardIconSize => 45.0;
+  static double get cardIconSize => 35.0;
 
   // ListTile Size
-  static double get listTileLeadingIconSize => 40.0;
-  static double get listTileTrailingIconSize => 30.0;
+  static double get listTileLeadingIconSize => 30.0;
+  static double get listTileTrailingIconSize => 20.0;
 
   // Button Border Radius
   static double get buttonBorderRadius => 10.0;

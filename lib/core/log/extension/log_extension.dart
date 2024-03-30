@@ -4,10 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:clean_architecture/core/error/model/client_failure.dart';
 import 'package:clean_architecture/core/error/model/failure.dart';
 import 'package:clean_architecture/core/error/model/server_failure.dart';
+import 'package:clean_architecture/core/localization/enum/text_type.dart';
 
 extension LogExtension on StackTrace {
   /// Logs a success message.
-  void printSuccessMessage({required String message}) {
+  void printSuccessMessage({required TextType textType, dynamic data}) {
     if (!kDebugMode) {
       return;
     }
@@ -20,13 +21,14 @@ extension LogExtension on StackTrace {
     successMessage += '\n[ClassName]: ${classAndMethodName.$1}';
     successMessage += '\n[MethodName]: ${classAndMethodName.$2}';
     successMessage += '\n[DateTime]: ${DateTime.now()}';
-    successMessage += '\n[Message]: $message';
+    successMessage += '\n[Message]: $textType';
+    successMessage += data == null ? '' : '\n[Data]: ${data?.toString() ?? AppStrings.emptyText}';
 
     developer.log(successMessage, name: 'SUCCESS', time: DateTime.now());
   }
 
-  /// Logs an error message.
-  void printErrorMessage({required Failure failure}) {
+  /// Logs an error message by [failure].
+  void printErrorMessageByFailure({required Failure failure}) {
     if (!kDebugMode) {
       return;
     }
@@ -48,7 +50,7 @@ extension LogExtension on StackTrace {
       errorMessage += '\n[ClientExceptionType]: ${failure.clientExceptionType}';
     }
 
-    errorMessage += '\n[ErrorMessage]: ${failure.thrownErrorOrException?.toString() ?? AppStrings.emptyText}';
+    errorMessage += failure.exception == null ? '' : '\n[ErrorMessage]: ${failure.exception?.toString() ?? AppStrings.emptyText}';
     developer.log(errorMessage, name: 'FAILURE', time: DateTime.now());
   }
 

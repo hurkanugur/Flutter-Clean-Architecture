@@ -60,9 +60,7 @@ class HomeView extends ConsumerWidget {
     final homeViewController = ref.read(HomeViewProvider.homeViewControllerProvider.notifier);
     final HomePageType? homePageType = HomePageType.getHomePageTypeByIndex(index: index);
 
-    if (homePageType != null) {
-      await homeViewController.changePage(homePageType: homePageType);
-    }
+    await homeViewController.changePage(homePageType: homePageType);
   }
 
   /// Represents the start drawer change event.

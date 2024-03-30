@@ -52,8 +52,8 @@ class HomeViewController extends StateNotifier<HomeViewState> {
   bool isDrawerOpen() => homePageScaffoldKey?.currentState?.isDrawerOpen ?? false;
 
   /// Changes the current page of the home view.
-  Future<void> changePage({required HomePageType homePageType}) async {
-    if (_changePageMethodMutex || (homePageType == state.homePageType)) {
+  Future<void> changePage({required HomePageType? homePageType}) async {
+    if (_changePageMethodMutex || homePageType == null || (homePageType == state.homePageType)) {
       return;
     }
 

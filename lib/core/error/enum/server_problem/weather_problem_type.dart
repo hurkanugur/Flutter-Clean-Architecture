@@ -11,20 +11,17 @@ enum WeatherProblemType {
 
   /// Creates a [WeatherProblemType] from [serverProblemName].
   ///
-  /// Throws a [ClientFailure] when an error occurs.
+  /// Returns `null` when the enum is not found.
   static WeatherProblemType? findByName({required String? serverProblemName}) {
-    if (serverProblemName == null || serverProblemName.isEmpty) {
-      return null;
-    }
-
     try {
       return values.firstWhere((element) => element.name == serverProblemName);
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.enumNotFoundError,
       );
     }
+    return null;
   }
 }

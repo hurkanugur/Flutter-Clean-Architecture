@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:clean_architecture/config/app_strings.dart';
 import 'package:clean_architecture/core/error/enum/client/client_exception_type.dart';
 import 'package:clean_architecture/core/localization/enum/language_type.dart';
 import 'package:clean_architecture/core/localization/enum/text_type.dart';
@@ -51,10 +52,10 @@ class LocalizationController extends StateNotifier<LocalizationState> {
         languageType: languageType,
         translations: json.decode(translationJsonString),
       );
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.translationUpdateError,
       );
     }
@@ -66,18 +67,17 @@ class LocalizationController extends StateNotifier<LocalizationState> {
   String translateText({required TextType textType}) {
     try {
       return state.translations['APPLICATION_TEXT']![textType.name];
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.translationNotFoundError,
       );
     }
+    return 'APPLICATION_TEXT.${textType.name}';
   }
 
   /// Translates the given [Failure].
-  ///
-  /// Throws a [ClientFailure] when an error occurs.
   String translateFailure({required Failure failure}) {
     try {
       if (failure is ServerFailure) {
@@ -85,18 +85,20 @@ class LocalizationController extends StateNotifier<LocalizationState> {
       } else if (failure is ClientFailure) {
         return state.translations['CLIENT_EXCEPTION']![failure.clientExceptionType.name];
       }
-    } catch (errorOrException) {
-      throw ClientFailure(
+    } catch (ex) {
+      ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
+        exception: ex,
         clientExceptionType: ClientExceptionType.translationNotFoundError,
       );
+
+      if (failure is ServerFailure) {
+        return 'SERVER_EXCEPTION.${failure.serverExceptionType.name}.${failure.serverProblemType.name}';
+      } else if (failure is ClientFailure) {
+        return 'CLIENT_EXCEPTION.${failure.clientExceptionType.name}';
+      }
     }
 
-    throw ClientFailure(
-      stackTrace: StackTrace.current,
-      thrownErrorOrException: null,
-      clientExceptionType: ClientExceptionType.unexpectedFailureTypeError,
-    );
+    return AppStrings.unknownText;
   }
 }

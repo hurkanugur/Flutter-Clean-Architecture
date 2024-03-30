@@ -3,6 +3,7 @@ import 'package:clean_architecture/core/error/enum/client/client_exception_type.
 import 'package:clean_architecture/core/error/model/client_failure.dart';
 import 'package:clean_architecture/core/error/model/server_failure.dart';
 import 'package:clean_architecture/config/app_resources.dart';
+import 'package:clean_architecture/core/localization/enum/text_type.dart';
 import 'package:clean_architecture/core/log/extension/log_extension.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
@@ -54,16 +55,32 @@ class HttpService {
       try {
         final ByteData certificateData = await rootBundle.load(webCertificatePath);
         securityContext.setTrustedCertificatesBytes(certificateData.buffer.asUint8List());
-        StackTrace.current.printSuccessMessage(message: '$webCertificatePath certificate is trusted successfully.');
-      } catch (errorOrException) {
-        StackTrace.current.printErrorMessage(
-          failure: ClientFailure(
-            stackTrace: StackTrace.current,
-            thrownErrorOrException: errorOrException,
-            clientExceptionType: ClientExceptionType.webCertificateCouldNotBeLoaded,
-          ),
+        StackTrace.current.printSuccessMessage(
+          textType: TextType.webCertificateIsTrustedSuccessfully,
+          data: webCertificatePath,
+        );
+      } catch (ex) {
+        ClientFailure.createAndLog(
+          stackTrace: StackTrace.current,
+          exception: ex,
+          clientExceptionType: ClientExceptionType.webCertificateCouldNotBeLoadedError,
         );
       }
+    }
+  }
+
+  /// Handles the [DioException].
+  Response<dynamic> _handleDioException({required DioException ex}) {
+    if (ex.response == null || ex.type == DioExceptionType.unknown) {
+      throw ServerFailure.createAndLogFromDioException(
+        dioException: ex,
+        stackTrace: StackTrace.current,
+      );
+    } else {
+      throw ServerFailure.createAndLogFromResponseData(
+        response: ex.response,
+        stackTrace: StackTrace.current,
+      );
     }
   }
 
@@ -84,15 +101,12 @@ class HttpService {
         options: options,
       );
     } on DioException catch (dioException) {
-      throw ServerFailure.fromDioException(
-        dioException: dioException,
+      return _handleDioException(ex: dioException);
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-      );
-    } catch (errorOrException) {
-      throw ClientFailure(
-        stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unknownException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.httpClientError,
       );
     }
   }
@@ -114,15 +128,12 @@ class HttpService {
         options: options,
       );
     } on DioException catch (dioException) {
-      throw ServerFailure.fromDioException(
-        dioException: dioException,
+      return _handleDioException(ex: dioException);
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-      );
-    } catch (errorOrException) {
-      throw ClientFailure(
-        stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unknownException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.httpClientError,
       );
     }
   }
@@ -144,15 +155,12 @@ class HttpService {
         options: options,
       );
     } on DioException catch (dioException) {
-      throw ServerFailure.fromDioException(
-        dioException: dioException,
+      return _handleDioException(ex: dioException);
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-      );
-    } catch (errorOrException) {
-      throw ClientFailure(
-        stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unknownException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.httpClientError,
       );
     }
   }
@@ -174,15 +182,12 @@ class HttpService {
         options: options,
       );
     } on DioException catch (dioException) {
-      throw ServerFailure.fromDioException(
-        dioException: dioException,
+      return _handleDioException(ex: dioException);
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-      );
-    } catch (errorOrException) {
-      throw ClientFailure(
-        stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unknownException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.httpClientError,
       );
     }
   }
@@ -204,26 +209,24 @@ class HttpService {
         options: options,
       );
     } on DioException catch (dioException) {
-      throw ServerFailure.fromDioException(
-        dioException: dioException,
+      return _handleDioException(ex: dioException);
+    } catch (ex) {
+      throw ClientFailure.createAndLog(
         stackTrace: StackTrace.current,
-      );
-    } catch (errorOrException) {
-      throw ClientFailure(
-        stackTrace: StackTrace.current,
-        thrownErrorOrException: errorOrException,
-        clientExceptionType: ClientExceptionType.unknownException,
+        exception: ex,
+        clientExceptionType: ClientExceptionType.httpClientError,
       );
     }
   }
 
   /// Prints the cookies saved on the [url] parameter.
   Future<void> printCookies({required String url}) async {
-    List<Cookie> cookies = await _cookieManager.cookieJar.loadForRequest(Uri.parse(url));
+    final List<Cookie> cookies = await _cookieManager.cookieJar.loadForRequest(Uri.parse(url));
 
-    for (Cookie cookie in cookies) {
-      StackTrace.current.printSuccessMessage(message: '${cookie.name}:${cookie.value}');
-    }
+    StackTrace.current.printSuccessMessage(
+      textType: TextType.cookies,
+      data: cookies.map((e) => '${e.name}: ${e.value}'),
+    );
   }
 
   /// Clear all cookies.

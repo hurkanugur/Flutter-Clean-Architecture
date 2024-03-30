@@ -55,7 +55,7 @@ class WeatherViewController extends StateNotifier<WeatherViewState> {
       state = state.copyWith(allWeatherInfoDTO: allWeatherInfoDTO);
     } on Failure catch (failure) {
       state = state.copyWith(allWeatherInfoDTO: null);
-      StackTrace.current.printErrorMessage(failure: failure);
+      StackTrace.current.printErrorMessageByFailure(failure: failure);
     } finally {
       await Future.delayed(const Duration(milliseconds: AnimationConstants.loadingAnimationExtraDelayDurationMS));
       loadingController?.isLoading = false;

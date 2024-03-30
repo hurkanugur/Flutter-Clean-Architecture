@@ -27,13 +27,16 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
     );
 
     if (response.statusCode != 200) {
-      throw ServerFailure.fromResponseData(response: response, stackTrace: StackTrace.current);
+      throw ServerFailure.createAndLogFromResponseData(
+        response: response,
+        stackTrace: StackTrace.current,
+      );
     }
 
     if (response.data == null) {
-      throw ServerFailure(
+      throw ServerFailure.createAndLog(
         stackTrace: StackTrace.current,
-        thrownErrorOrException: null,
+        exception: null,
         serverExceptionType: ServerExceptionType.unknownException,
         serverProblemType: UnknownProblemType.nullResponseValueError,
         statusCode: null,
