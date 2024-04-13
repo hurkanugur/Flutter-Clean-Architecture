@@ -23,4 +23,4 @@ This app uses the OpenWeatherMap Current Weather Data API (https://openweatherma
 **image_picker:** ^1.0.7 # Picks Images From Gallery\
 **file_picker:** ^6.1.1 # Picks Files From Documents and Downloads\
 **permission_handler:** ^11.3.1 # Permission Management\
-**device_info_plus:** ^10.1.0 # Device Information\
+**device_info_plus:** ^10.1.0 # Device Information

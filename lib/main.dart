@@ -78,7 +78,7 @@ class MyApp extends ConsumerWidget {
     return LoadingLottieAnimation(
       isLoading: loadingState.isLoading,
       child: MaterialApp.router(
-        title: 'Clean Architecture',
+        title: AppConfig.environment.appName,
         themeMode: themeState.themeMode,
         theme: LightThemeConstants.themeData,
         darkTheme: DarkThemeConstants.themeData,
