@@ -1,6 +1,6 @@
 A Weather Forecast App with Flutter Clean Architecture and Riverpod State Management\
 \
-This Weather Forecast App is a demonstration of Flutter Clean Architecture principles, showcasing efficient state management using Riverpod.\
+This app uses the OpenWeatherMap Current Weather Data API (https://openweathermap.org/current) to fetch real-time weather information.\
 \
 **Key Dependencies:**\
 \
@@ -25,4 +25,3 @@ This Weather Forecast App is a demonstration of Flutter Clean Architecture princ
 **permission_handler:** ^11.3.1 # Permission Management\
 **device_info_plus:** ^10.1.0 # Device Information\
 \
-This app uses the OpenWeatherMap Current Weather Data API (https://openweathermap.org/current) to fetch real-time weather information.
