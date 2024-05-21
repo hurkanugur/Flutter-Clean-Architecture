@@ -1,7 +1,7 @@
 import 'package:clean_architecture/config/app_resources.dart';
 import 'package:clean_architecture/core/localization/enum/text_type.dart';
-import 'package:clean_architecture/core/localization/provider/localization_provider.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/localization/extension/localization_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/advanced_lottie_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,10 +11,9 @@ class AdvancedNoResultsAnimation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localizationController = ref.read(LocalizationProvider.localizationControllerProvider.notifier);
-    final Orientation orientation = MediaQuery.of(context).orientation;
+    final Orientation orientation = MediaQuery.orientationOf(context);
     final bool isPortrait = (orientation == Orientation.portrait) ? true : false;
-    final double lottieHeight = MediaQuery.of(context).size.shortestSide / (isPortrait ? 1.5 : 2);
+    final double lottieHeight = MediaQuery.sizeOf(context).shortestSide / (isPortrait ? 1.5 : 2);
 
     return LayoutBuilder(builder: (context, constraints) {
       return Align(
@@ -33,18 +32,14 @@ class AdvancedNoResultsAnimation extends ConsumerWidget {
             child: Column(
               children: <Widget>[
                 AdvancedLottieAnimation(
-                  lottieAnimationPath: AppResources.noResultsAnimationPath,
+                  lottieAnimationPath: AppResources.lottieNoResultsAnimationPath,
                   animationHeight: lottieHeight,
                   isLottieAnimationVisible: true,
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  localizationController.translateText(textType: TextType.noResultsFound),
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: context.appColors.transparentWidgetForegroundColor,
-                        fontWeight: FontWeight.w300,
-                        fontStyle: FontStyle.italic,
-                      ),
+                  ref.translateText(textType: TextType.noResultsFound),
+                  style: context.appTextStyles.largeTextWithTransparentBackground,
                   textAlign: TextAlign.center,
                 ),
               ],

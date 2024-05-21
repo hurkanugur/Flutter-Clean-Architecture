@@ -2,8 +2,8 @@ import 'package:clean_architecture/app/domain/weather/model/all_weather_info_dto
 import 'package:clean_architecture/app/presentation/weather/provider/weather_view_provider.dart';
 import 'package:clean_architecture/config/app_strings.dart';
 import 'package:clean_architecture/core/localization/enum/text_type.dart';
-import 'package:clean_architecture/core/localization/provider/localization_provider.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/localization/extension/localization_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/config/app_icons.dart';
 import 'package:clean_architecture/core/widgets/advanced_no_results_animation.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,6 @@ class WeatherInformation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localizationController = ref.read(LocalizationProvider.localizationControllerProvider.notifier);
     final weatherViewState = ref.watch(WeatherViewProvider.weatherViewControllerProvider);
     final AllWeatherInfoDTO? allWeatherInfoDTO = weatherViewState.allWeatherInfoDTO;
 
@@ -44,7 +43,7 @@ class WeatherInformation extends ConsumerWidget {
               style: Theme.of(ref.context).textTheme.headlineSmall?.copyWith(color: context.appColors.transparentWidgetForegroundColor),
             ),
             Text(
-              '${allWeatherInfoDTO.main?.temp?.toStringAsFixed(1)}${localizationController.translateText(textType: TextType.celsius)}',
+              '${allWeatherInfoDTO.main?.temp?.toStringAsFixed(1)}${ref.translateText(textType: TextType.celsius)}',
               style: Theme.of(ref.context).textTheme.headlineMedium?.copyWith(color: context.appColors.transparentWidgetForegroundColor),
             ),
           ],

@@ -1,6 +1,6 @@
 enum WidgetType {
-  onTransparentWidget,
-  onFilledWidget,
+  withTransparentParentWidget,
+  withFilledParentWidget,
   success,
   warning,
   error,

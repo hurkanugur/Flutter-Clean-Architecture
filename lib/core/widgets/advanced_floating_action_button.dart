@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_strings.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/enum/floating_action_button_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,8 +50,8 @@ class AdvancedFloatingActionButton extends ConsumerWidget {
   /// Creates a small floating action button.
   Widget _getSmallWidget({required BuildContext context}) {
     return FloatingActionButton.small(
-      backgroundColor: context.appColors.floatingActionButtonBackgroundColor,
-      foregroundColor: context.appColors.filledWidgetForegroundColor,
+      backgroundColor: onTap == null ? context.appColors.filledWidgetDisabledBackgroundColor : context.appColors.floatingActionButtonBackgroundColor,
+      foregroundColor: onTap == null ? context.appColors.filledWidgetDisabledForegroundColor : context.appColors.filledWidgetForegroundColor,
       tooltip: tooltip,
       onPressed: onTap,
       child: Icon(icon),
@@ -61,8 +61,8 @@ class AdvancedFloatingActionButton extends ConsumerWidget {
   /// Creates a normal floating action button.
   Widget _getNormalWidget({required BuildContext context}) {
     return FloatingActionButton(
-      backgroundColor: context.appColors.floatingActionButtonBackgroundColor,
-      foregroundColor: context.appColors.filledWidgetForegroundColor,
+      backgroundColor: onTap == null ? context.appColors.filledWidgetDisabledBackgroundColor : context.appColors.floatingActionButtonBackgroundColor,
+      foregroundColor: onTap == null ? context.appColors.filledWidgetDisabledForegroundColor : context.appColors.filledWidgetForegroundColor,
       tooltip: tooltip,
       onPressed: onTap,
       child: Icon(icon),
@@ -72,8 +72,8 @@ class AdvancedFloatingActionButton extends ConsumerWidget {
   /// Creates a large floating action button.
   Widget _getLargeWidget({required BuildContext context}) {
     return FloatingActionButton.large(
-      backgroundColor: context.appColors.floatingActionButtonBackgroundColor,
-      foregroundColor: context.appColors.filledWidgetForegroundColor,
+      backgroundColor: onTap == null ? context.appColors.filledWidgetDisabledBackgroundColor : context.appColors.floatingActionButtonBackgroundColor,
+      foregroundColor: onTap == null ? context.appColors.filledWidgetDisabledForegroundColor : context.appColors.filledWidgetForegroundColor,
       tooltip: tooltip,
       onPressed: onTap,
       child: Icon(icon),
@@ -83,12 +83,15 @@ class AdvancedFloatingActionButton extends ConsumerWidget {
   /// Creates a extended floating action button.
   Widget _getExtendedWidget({required BuildContext context}) {
     return FloatingActionButton.extended(
-      backgroundColor: context.appColors.floatingActionButtonBackgroundColor,
-      foregroundColor: context.appColors.filledWidgetForegroundColor,
+      backgroundColor: onTap == null ? context.appColors.filledWidgetDisabledBackgroundColor : context.appColors.floatingActionButtonBackgroundColor,
+      foregroundColor: onTap == null ? context.appColors.filledWidgetDisabledForegroundColor : context.appColors.filledWidgetForegroundColor,
       tooltip: tooltip,
       onPressed: onTap,
       icon: Icon(icon),
-      label: Text(title?.isEmpty == true ? AppStrings.unknownText : title!),
+      label: Text(
+        title?.isEmpty == true ? AppStrings.unknownText : title!,
+        style: onTap == null ? context.appTextStyles.mediumDisabledTextWithFilledBackground : context.appTextStyles.mediumTextWithFilledBackground,
+      ),
     );
   }
 }

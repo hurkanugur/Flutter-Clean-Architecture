@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_style_type.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_border_model.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_icon_button_model.dart';
@@ -119,13 +119,16 @@ class AdvancedTextFieldForm extends ConsumerWidget {
       keyboardType: keyboardType,
       textCapitalization: textCapitalization,
       decoration: InputDecoration(
-        labelText: hintText,
-        labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(color: context.appColors.transparentWidgetForegroundColor),
-        hintText: '',
-        hintStyle: TextStyle(color: context.appColors.transparentWidgetDisabledForegroundColor),
+        label: Text(
+          hintText ?? '',
+          style: context.appTextStyles.mediumDisabledTextWithTransparentBackground,
+        ),
+        labelStyle: context.appTextStyles.mediumTextWithTransparentBackground,
+        hintText: hintText,
+        hintStyle: context.appTextStyles.mediumDisabledTextWithTransparentBackground,
         prefixIcon: _createTitleSection(context: context),
         suffixIcon: _createIconButton(context: context, advancedIconButtonModel: suffixIconButton),
-        contentPadding: const EdgeInsets.only(bottom: 14),
+        contentPadding: const EdgeInsets.only(bottom: 16),
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         fillColor: isReadOnly ? context.appColors.transparentWidgetDisabledBackgroundColor : context.appColors.transparentWidgetBackgroundColor,
@@ -154,7 +157,7 @@ class AdvancedTextFieldForm extends ConsumerWidget {
           const SizedBox(width: 10),
           Text(
             '$title:',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(color: context.appColors.transparentWidgetForegroundColor),
+            style: context.appTextStyles.mediumTextWithTransparentBackground,
           ),
           const SizedBox(width: 10),
         ],
@@ -172,9 +175,14 @@ class AdvancedTextFieldForm extends ConsumerWidget {
       onPressed: advancedIconButtonModel.onTap,
       icon: Icon(advancedIconButtonModel.icon),
       tooltip: advancedIconButtonModel.tooltip,
+      focusColor: context.appColors.transparentWidgetBackgroundColor,
+      hoverColor: context.appColors.transparentWidgetBackgroundColor,
+      splashColor: context.appColors.transparentWidgetBackgroundColor,
+      disabledColor: context.appColors.transparentWidgetBackgroundColor,
+      color: context.appColors.transparentWidgetBackgroundColor,
       style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(advancedIconButtonModel.onTap == null ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor),
-        shape: MaterialStatePropertyAll(
+        foregroundColor: WidgetStatePropertyAll(advancedIconButtonModel.onTap == null ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor),
+        shape: WidgetStatePropertyAll(
           border.copyWith(hasBorder: false).getRoundedRectangleBorder(context: context, widgetStyleType: WidgetStyleType.transparent),
         ),
       ),

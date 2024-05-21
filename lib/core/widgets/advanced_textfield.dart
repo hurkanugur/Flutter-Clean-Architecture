@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_style_type.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_border_model.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_icon_button_model.dart';
@@ -124,14 +124,14 @@ class AdvancedTextField extends ConsumerWidget {
       onEditingComplete: onEditingComplete,
       keyboardType: keyboardType,
       textCapitalization: textCapitalization,
-      style: TextStyle(color: isReadOnly ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor),
+      style: isReadOnly ? context.appTextStyles.mediumDisabledTextWithTransparentBackground : context.appTextStyles.mediumTextWithTransparentBackground,
       decoration: InputDecoration(
         label: Text(
           title,
-          style: TextStyle(color: isReadOnly ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor),
+          style: isReadOnly ? context.appTextStyles.mediumDisabledTextWithTransparentBackground : context.appTextStyles.mediumTextWithTransparentBackground,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: context.appColors.transparentWidgetDisabledForegroundColor),
+        hintStyle: context.appTextStyles.mediumDisabledTextWithTransparentBackground,
         prefixIcon: _createIconButton(context: context, advancedIconButtonModel: prefixIconButton),
         suffixIcon: _createIconButton(context: context, advancedIconButtonModel: suffixIconButton),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -158,9 +158,14 @@ class AdvancedTextField extends ConsumerWidget {
       onPressed: advancedIconButtonModel.onTap,
       icon: Icon(advancedIconButtonModel.icon),
       tooltip: advancedIconButtonModel.tooltip,
+      focusColor: context.appColors.transparentWidgetBackgroundColor,
+      hoverColor: context.appColors.transparentWidgetBackgroundColor,
+      splashColor: context.appColors.transparentWidgetBackgroundColor,
+      disabledColor: context.appColors.transparentWidgetBackgroundColor,
+      color: context.appColors.transparentWidgetBackgroundColor,
       style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(advancedIconButtonModel.onTap == null ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor),
-        shape: MaterialStatePropertyAll(
+        foregroundColor: WidgetStatePropertyAll(advancedIconButtonModel.onTap == null ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor),
+        shape: WidgetStatePropertyAll(
           border.copyWith(hasBorder: false).getRoundedRectangleBorder(context: context, widgetStyleType: WidgetStyleType.transparent),
         ),
       ),

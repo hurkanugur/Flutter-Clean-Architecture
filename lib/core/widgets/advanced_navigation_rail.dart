@@ -1,4 +1,4 @@
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_navigation_rail_destination_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,9 +36,9 @@ class AdvancedNavigationRail extends ConsumerWidget {
         backgroundColor: context.appColors.navigationRailBackgroundColor,
         indicatorColor: context.appColors.filledWidgetSelectedBackgroundColor,
         selectedIconTheme: IconThemeData(color: context.appColors.filledWidgetSelectedForegroundColor),
-        selectedLabelTextStyle: TextStyle(color: context.appColors.transparentWidgetForegroundColor),
+        selectedLabelTextStyle: context.appTextStyles.mediumTextWithTransparentBackground,
         unselectedIconTheme: IconThemeData(color: context.appColors.transparentWidgetUnselectedForegroundColor),
-        unselectedLabelTextStyle: TextStyle(color: context.appColors.transparentWidgetForegroundColor),
+        unselectedLabelTextStyle: context.appTextStyles.mediumTextWithTransparentBackground,
       ),
       child: NavigationRail(
         destinations: _createDestinationItemList(context: context),

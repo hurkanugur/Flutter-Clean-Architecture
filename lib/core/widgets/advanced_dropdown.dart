@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/config/app_icons.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_style_type.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_border_model.dart';
@@ -49,8 +49,9 @@ class AdvancedDropdown extends ConsumerWidget {
             value: selectedItem,
             isExpanded: true,
             onChanged: onChanged,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(color: context.appColors.transparentWidgetForegroundColor),
+            style: context.appTextStyles.mediumTextWithTransparentBackground,
             icon: _createDropdownIcon(context: context),
+            dropdownColor: context.appColors.appBarBackgroundColor,
             items: _createDropdownItemList(context: context),
           ),
         ),
@@ -109,7 +110,7 @@ class AdvancedDropdown extends ConsumerWidget {
                 fit: FlexFit.tight,
                 child: Text(
                   item.title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: context.appColors.transparentWidgetForegroundColor),
+                  style: context.appTextStyles.mediumTextWithTransparentBackground,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                 ),

@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_status_type.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_style_type.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_border_model.dart';
@@ -62,9 +62,9 @@ class AdvancedIconButton extends ConsumerWidget {
       icon: Icon(icon),
       tooltip: tooltip,
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(_getBackgroundColor(context: context)),
-        foregroundColor: MaterialStatePropertyAll(_getForegroundColor(context: context)),
-        shape: MaterialStatePropertyAll(
+        backgroundColor: WidgetStatePropertyAll(_getBackgroundColor(context: context)),
+        foregroundColor: WidgetStatePropertyAll(_getForegroundColor(context: context)),
+        shape: WidgetStatePropertyAll(
           border.getRoundedRectangleBorder(
             context: context,
             widgetStyleType: widgetStyleType,
@@ -81,8 +81,8 @@ class AdvancedIconButton extends ConsumerWidget {
       return switch (widgetStyleType) {
         WidgetStyleType.filled => context.appColors.filledWidgetDisabledForegroundColor,
         WidgetStyleType.transparent => switch (widgetType) {
-            WidgetType.onTransparentWidget => context.appColors.transparentWidgetDisabledForegroundColor,
-            WidgetType.onFilledWidget => context.appColors.filledWidgetDisabledForegroundColor,
+            WidgetType.withTransparentParentWidget => context.appColors.transparentWidgetDisabledForegroundColor,
+            WidgetType.withFilledParentWidget => context.appColors.filledWidgetDisabledForegroundColor,
             WidgetType.success => context.appColors.transparentWidgetDisabledForegroundColor,
             WidgetType.warning => context.appColors.transparentWidgetDisabledForegroundColor,
             WidgetType.error => context.appColors.transparentWidgetDisabledForegroundColor,
@@ -93,8 +93,8 @@ class AdvancedIconButton extends ConsumerWidget {
     return switch (widgetStyleType) {
       WidgetStyleType.filled => context.appColors.filledWidgetForegroundColor,
       WidgetStyleType.transparent => switch (widgetType) {
-          WidgetType.onTransparentWidget => context.appColors.transparentWidgetForegroundColor,
-          WidgetType.onFilledWidget => context.appColors.filledWidgetForegroundColor,
+          WidgetType.withTransparentParentWidget => context.appColors.transparentWidgetForegroundColor,
+          WidgetType.withFilledParentWidget => context.appColors.filledWidgetForegroundColor,
           WidgetType.success => context.appColors.informationColor,
           WidgetType.warning => context.appColors.warningColor,
           WidgetType.error => context.appColors.errorColor,
@@ -113,8 +113,8 @@ class AdvancedIconButton extends ConsumerWidget {
 
     return switch (widgetStyleType) {
       WidgetStyleType.filled => switch (widgetType) {
-          WidgetType.onTransparentWidget => context.appColors.filledWidgetBackgroundColor,
-          WidgetType.onFilledWidget => context.appColors.filledWidgetBackgroundColor,
+          WidgetType.withTransparentParentWidget => context.appColors.filledWidgetBackgroundColor,
+          WidgetType.withFilledParentWidget => context.appColors.filledWidgetBackgroundColor,
           WidgetType.success => context.appColors.informationColor,
           WidgetType.warning => context.appColors.warningColor,
           WidgetType.error => context.appColors.errorColor,

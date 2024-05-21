@@ -1,4 +1,4 @@
-import 'package:clean_architecture/core/localization/provider/localization_provider.dart';
+import 'package:clean_architecture/core/localization/extension/localization_extension.dart';
 import 'package:clean_architecture/core/localization/enum/text_type.dart';
 import 'package:clean_architecture/core/widgets/advanced_floating_action_button.dart';
 import 'package:clean_architecture/core/widgets/enum/floating_action_button_type.dart';
@@ -12,13 +12,11 @@ class WeatherFloatingActionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localizationController = ref.read(LocalizationProvider.localizationControllerProvider.notifier);
-
     return AdvancedFloatingActionButton(
       icon: AppIcons.refreshIcon,
-      title: localizationController.translateText(textType: TextType.refresh),
+      title: ref.translateText(textType: TextType.refresh),
       onTap: () async => await _onTap(ref: ref),
-      tooltip: localizationController.translateText(textType: TextType.refresh),
+      tooltip: ref.translateText(textType: TextType.refresh),
       type: FloatingActionButtonType.extended,
     );
   }

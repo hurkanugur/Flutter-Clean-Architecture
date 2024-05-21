@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:clean_architecture/core/storage/extension/shared_preference_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:clean_architecture/config/app_strings.dart';
@@ -45,9 +46,14 @@ class LocalizationController extends StateNotifier<LocalizationState> {
   /// Changes the language of the app.
   ///
   /// Throws a [ClientFailure] when an error occurs.
-  Future<void> changeLanguage({required LanguageType languageType}) async {
+  Future<void> changeLanguage({required LanguageType languageType, required WidgetRef? ref}) async {
     try {
       final String translationJsonString = await rootBundle.loadString(languageType.translationFilePath);
+
+      if (ref != null) {
+        await ref.sharedPreference.setLanguageType(languageType: languageType);
+      }
+
       state = LocalizationState(
         languageType: languageType,
         translations: json.decode(translationJsonString),

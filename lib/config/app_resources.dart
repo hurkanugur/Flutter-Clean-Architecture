@@ -19,5 +19,5 @@ class AppResources {
   static const String lottieLoadingAnimationPath = 'assets/lottie/loading_animation.json';
 
   /// URL: https://lottiefiles.com/animations/wind-icon-wdUwYp3r2m?from=search
-  static const String noResultsAnimationPath = 'assets/lottie/no_results_animation.json';
+  static const String lottieNoResultsAnimationPath = 'assets/lottie/no_results_animation.json';
 }

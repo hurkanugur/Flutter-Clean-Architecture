@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_status_type.dart';
 import 'package:clean_architecture/core/widgets/enum/widget_style_type.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_border_model.dart';
@@ -53,9 +53,9 @@ class AdvancedTextButton extends ConsumerWidget {
     return TextButton(
       onPressed: onTap,
       style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(_getForegroundColor(context: context)),
-        backgroundColor: MaterialStatePropertyAll(_getBackgroundColor(context: context)),
-        shape: MaterialStatePropertyAll(
+        foregroundColor: WidgetStatePropertyAll(_getForegroundColor(context: context)),
+        backgroundColor: WidgetStatePropertyAll(_getBackgroundColor(context: context)),
+        shape: WidgetStatePropertyAll(
           border.getRoundedRectangleBorder(
             context: context,
             widgetStyleType: widgetStyleType,
@@ -67,6 +67,7 @@ class AdvancedTextButton extends ConsumerWidget {
         title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
+        style: _getTextStyle(context: context, onTap: onTap),
       ),
     );
   }
@@ -77,8 +78,8 @@ class AdvancedTextButton extends ConsumerWidget {
       return switch (widgetStyleType) {
         WidgetStyleType.filled => context.appColors.filledWidgetDisabledForegroundColor,
         WidgetStyleType.transparent => switch (widgetType) {
-            WidgetType.onTransparentWidget => context.appColors.transparentWidgetDisabledForegroundColor,
-            WidgetType.onFilledWidget => context.appColors.filledWidgetDisabledForegroundColor,
+            WidgetType.withTransparentParentWidget => context.appColors.transparentWidgetDisabledForegroundColor,
+            WidgetType.withFilledParentWidget => context.appColors.filledWidgetDisabledForegroundColor,
             WidgetType.success => context.appColors.transparentWidgetDisabledForegroundColor,
             WidgetType.warning => context.appColors.transparentWidgetDisabledForegroundColor,
             WidgetType.error => context.appColors.transparentWidgetDisabledForegroundColor,
@@ -89,8 +90,8 @@ class AdvancedTextButton extends ConsumerWidget {
     return switch (widgetStyleType) {
       WidgetStyleType.filled => context.appColors.filledWidgetForegroundColor,
       WidgetStyleType.transparent => switch (widgetType) {
-          WidgetType.onTransparentWidget => context.appColors.transparentWidgetForegroundColor,
-          WidgetType.onFilledWidget => context.appColors.filledWidgetForegroundColor,
+          WidgetType.withTransparentParentWidget => context.appColors.transparentWidgetForegroundColor,
+          WidgetType.withFilledParentWidget => context.appColors.filledWidgetForegroundColor,
           WidgetType.success => context.appColors.informationColor,
           WidgetType.warning => context.appColors.warningColor,
           WidgetType.error => context.appColors.errorColor,
@@ -109,13 +110,40 @@ class AdvancedTextButton extends ConsumerWidget {
 
     return switch (widgetStyleType) {
       WidgetStyleType.filled => switch (widgetType) {
-          WidgetType.onTransparentWidget => context.appColors.filledWidgetBackgroundColor,
-          WidgetType.onFilledWidget => context.appColors.filledWidgetBackgroundColor,
+          WidgetType.withTransparentParentWidget => context.appColors.filledWidgetBackgroundColor,
+          WidgetType.withFilledParentWidget => context.appColors.filledWidgetBackgroundColor,
           WidgetType.success => context.appColors.informationColor,
           WidgetType.warning => context.appColors.warningColor,
           WidgetType.error => context.appColors.errorColor,
         },
       WidgetStyleType.transparent => context.appColors.transparentWidgetBackgroundColor,
+    };
+  }
+
+  /// Get text style by [widgetType].
+  TextStyle? _getTextStyle({required BuildContext context, Future<void> Function()? onTap}) {
+    if (onTap == null) {
+      return switch (widgetStyleType) {
+        WidgetStyleType.filled => context.appTextStyles.mediumDisabledTextWithFilledBackground,
+        WidgetStyleType.transparent => switch (widgetType) {
+            WidgetType.withTransparentParentWidget => context.appTextStyles.mediumDisabledTextWithTransparentBackground,
+            WidgetType.withFilledParentWidget => context.appTextStyles.mediumDisabledTextWithFilledBackground,
+            WidgetType.success => context.appTextStyles.mediumDisabledTextWithTransparentBackground,
+            WidgetType.warning => context.appTextStyles.mediumDisabledTextWithTransparentBackground,
+            WidgetType.error => context.appTextStyles.mediumDisabledTextWithTransparentBackground,
+          },
+      };
+    }
+
+    return switch (widgetStyleType) {
+      WidgetStyleType.filled => context.appTextStyles.mediumTextWithFilledBackground,
+      WidgetStyleType.transparent => switch (widgetType) {
+          WidgetType.withTransparentParentWidget => context.appTextStyles.mediumTextWithTransparentBackground,
+          WidgetType.withFilledParentWidget => context.appTextStyles.mediumTextWithFilledBackground,
+          WidgetType.success => context.appTextStyles.mediumInfoText,
+          WidgetType.warning => context.appTextStyles.mediumWarningText,
+          WidgetType.error => context.appTextStyles.mediumErrorText,
+        },
     };
   }
 }

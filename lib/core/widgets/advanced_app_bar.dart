@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:clean_architecture/core/widgets/model/advanced_app_bar_icon_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,11 +46,14 @@ class AdvancedAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   /// Creates the title widget.
   Widget? _getTitleWidget({required BuildContext context}) {
-    if (title?.isEmpty == true) {
+    if (title == null || title!.isEmpty) {
       return null;
     }
 
-    return Text(title!);
+    return Text(
+      title!,
+      style: context.appTextStyles.largeBoldTextWithTransparentBackground,
+    );
   }
 
   /// Creates the leading widget.

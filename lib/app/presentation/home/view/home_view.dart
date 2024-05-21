@@ -2,7 +2,7 @@ import 'package:clean_architecture/app/presentation/settings/widget/settings_dra
 import 'package:clean_architecture/app/presentation/weather/widget/weather_drawer.dart';
 import 'package:clean_architecture/app/presentation/weather_details/widget/weather_details_drawer.dart';
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/localization/provider/localization_provider.dart';
+import 'package:clean_architecture/core/localization/extension/localization_extension.dart';
 import 'package:clean_architecture/core/localization/enum/text_type.dart';
 import 'package:clean_architecture/app/presentation/home/provider/home_view_provider.dart';
 import 'package:clean_architecture/app/presentation/settings/view/settings_view.dart';
@@ -99,8 +99,6 @@ class HomeView extends ConsumerWidget {
       return null;
     }
 
-    final localizationController = ref.read(LocalizationProvider.localizationControllerProvider.notifier);
-
     return AdvancedNavigationBar(
       currentIndex: homePageType.index,
       onTap: (index) async => await _onPageChanged(ref: ref, index: index),
@@ -108,20 +106,20 @@ class HomeView extends ConsumerWidget {
         AdvancedNavigationBarItemModel(
           unselectedIcon: AppIcons.weatherIcon,
           selectedIcon: AppIcons.weatherIcon,
-          title: localizationController.translateText(textType: TextType.weather),
-          tooltip: localizationController.translateText(textType: TextType.weather),
+          title: ref.translateText(textType: TextType.weather),
+          tooltip: ref.translateText(textType: TextType.weather),
         ),
         AdvancedNavigationBarItemModel(
           unselectedIcon: AppIcons.weatherDetailsIcon,
           selectedIcon: AppIcons.weatherDetailsIcon,
-          title: localizationController.translateText(textType: TextType.details),
-          tooltip: localizationController.translateText(textType: TextType.details),
+          title: ref.translateText(textType: TextType.details),
+          tooltip: ref.translateText(textType: TextType.details),
         ),
         AdvancedNavigationBarItemModel(
           unselectedIcon: AppIcons.settingsIcon,
           selectedIcon: AppIcons.settingsIcon,
-          title: localizationController.translateText(textType: TextType.settings),
-          tooltip: localizationController.translateText(textType: TextType.settings),
+          title: ref.translateText(textType: TextType.settings),
+          tooltip: ref.translateText(textType: TextType.settings),
         ),
       ],
     );
@@ -133,8 +131,6 @@ class HomeView extends ConsumerWidget {
       return const SizedBox();
     }
 
-    final localizationController = ref.read(LocalizationProvider.localizationControllerProvider.notifier);
-
     return AdvancedNavigationRail(
       currentIndex: homePageType.index,
       onTap: (index) async => await _onPageChanged(ref: ref, index: index),
@@ -142,17 +138,17 @@ class HomeView extends ConsumerWidget {
         AdvancedNavigationRailDestinationModel(
           unselectedIcon: AppIcons.weatherIcon,
           selectedIcon: AppIcons.weatherIcon,
-          title: localizationController.translateText(textType: TextType.weather),
+          title: ref.translateText(textType: TextType.weather),
         ),
         AdvancedNavigationRailDestinationModel(
           unselectedIcon: AppIcons.weatherDetailsIcon,
           selectedIcon: AppIcons.weatherDetailsIcon,
-          title: localizationController.translateText(textType: TextType.details),
+          title: ref.translateText(textType: TextType.details),
         ),
         AdvancedNavigationRailDestinationModel(
           unselectedIcon: AppIcons.settingsIcon,
           selectedIcon: AppIcons.settingsIcon,
-          title: localizationController.translateText(textType: TextType.settings),
+          title: ref.translateText(textType: TextType.settings),
         ),
       ],
     );

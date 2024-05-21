@@ -1,5 +1,5 @@
 import 'package:clean_architecture/config/app_dimensions.dart';
-import 'package:clean_architecture/core/theme/extension/color_extension.dart';
+import 'package:clean_architecture/core/theme/extension/theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,9 +43,8 @@ class AdvancedListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
-      iconColor: context.appColors.transparentWidgetForegroundColor,
-      textColor: context.appColors.transparentWidgetForegroundColor,
-      tileColor: context.appColors.transparentWidgetBackgroundColor,
+      iconColor: onTap == null && onLongPress == null ? context.appColors.transparentWidgetDisabledForegroundColor : context.appColors.transparentWidgetForegroundColor,
+      tileColor: onTap == null && onLongPress == null ? context.appColors.transparentWidgetDisabledBackgroundColor : context.appColors.transparentWidgetBackgroundColor,
       title: _getTitleWidget(context: context),
       subtitle: _getSubtitleWidget(context: context),
       leading: _getLeadingWidget(context: context),
@@ -57,7 +56,7 @@ class AdvancedListTile extends ConsumerWidget {
 
   /// Creates the title widget.
   Widget? _getTitleWidget({required BuildContext context}) {
-    if (title?.isEmpty == true) {
+    if (subtitle == null || title?.isEmpty == true) {
       return null;
     }
 
@@ -65,12 +64,13 @@ class AdvancedListTile extends ConsumerWidget {
       title!,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
+      style: onTap == null && onLongPress == null ? context.appTextStyles.mediumDisabledTextWithTransparentBackground : context.appTextStyles.mediumTextWithTransparentBackground,
     );
   }
 
   /// Creates the subtitle widget.
   Widget? _getSubtitleWidget({required BuildContext context}) {
-    if (subtitle?.isEmpty == true) {
+    if (subtitle == null || subtitle?.isEmpty == true) {
       return null;
     }
 
@@ -78,6 +78,7 @@ class AdvancedListTile extends ConsumerWidget {
       subtitle!,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
+      style: onTap == null && onLongPress == null ? context.appTextStyles.smallDisabledTextWithTransparentBackground : context.appTextStyles.smallTextWithTransparentBackground,
     );
   }
 

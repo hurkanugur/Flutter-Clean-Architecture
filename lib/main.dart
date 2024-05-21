@@ -41,10 +41,16 @@ Future<void> main() async {
   );
 
   final localizationController = providerContainer.read(LocalizationProvider.localizationControllerProvider.notifier);
-  await localizationController.changeLanguage(languageType: sharedPreferenceService.getLanguageType());
+  await localizationController.changeLanguage(
+    languageType: sharedPreferenceService.getLanguageType(),
+    ref: null,
+  );
 
   final themeController = providerContainer.read(ThemeProvider.themeControllerProvider.notifier);
-  themeController.themeMode = sharedPreferenceService.getThemeMode();
+  themeController.changeTheme(
+    themeMode: sharedPreferenceService.getThemeMode(),
+    ref: null,
+  );
 
   final DatabaseService databaseService = providerContainer.read(StorageProvider.databaseServiceProvider);
   await databaseService.createAndOpenDatabase();

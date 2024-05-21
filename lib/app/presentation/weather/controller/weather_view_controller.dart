@@ -3,9 +3,8 @@ import 'package:clean_architecture/app/domain/weather/model/weather_request_dto.
 import 'package:clean_architecture/core/animation/constants/animation_constants.dart';
 import 'package:clean_architecture/config/app_config.dart';
 import 'package:clean_architecture/app/domain/weather/usecase/get_all_weather_info_usecase.dart';
-import 'package:clean_architecture/core/error/model/failure.dart';
+import 'package:clean_architecture/core/base/model/operation_result.dart';
 import 'package:clean_architecture/core/loading/provider/loading_provider.dart';
-import 'package:clean_architecture/core/log/extension/log_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WeatherViewState {
@@ -49,16 +48,17 @@ class WeatherViewController extends StateNotifier<WeatherViewState> {
       apiKey: AppConfig.apiKey,
     );
 
-    try {
-      loadingController?.isLoading = true;
-      final AllWeatherInfoDTO? allWeatherInfoDTO = await _getAllWeatherInfoUsecase.execute(weatherRequestDTO: weatherRequestDTO);
-      state = state.copyWith(allWeatherInfoDTO: allWeatherInfoDTO);
-    } on Failure catch (failure) {
+    loadingController?.isLoading = true;
+
+    final OperationResult<AllWeatherInfoDTO?> result = await _getAllWeatherInfoUsecase.execute(weatherRequestDTO: weatherRequestDTO);
+
+    if (result.hasData) {
+      state = state.copyWith(allWeatherInfoDTO: result.data);
+    } else {
       state = state.copyWith(allWeatherInfoDTO: null);
-      StackTrace.current.printErrorMessageByFailure(failure: failure);
-    } finally {
-      await Future.delayed(const Duration(milliseconds: AnimationConstants.loadingAnimationExtraDelayDurationMS));
-      loadingController?.isLoading = false;
     }
+
+    await Future.delayed(const Duration(milliseconds: AnimationConstants.loadingAnimationExtraDelayDurationMS));
+    loadingController?.isLoading = false;
   }
 }
